@@ -55,7 +55,8 @@ class App extends React.Component {
   add() {
     this.state.movies.push({title: this.state.title});
     this.setState({
-      movies: this.state.movies
+      movies: this.state.movies,
+      title: ''
     });
   }
 
@@ -63,8 +64,8 @@ class App extends React.Component {
     return (
       <div>
         <h1>MovieList</h1>
-        <input type='text' onChange={this.update}/>
-        <button onClick={this.add}>Add</button>
+        <input type='text' onChange={this.update} value={this.state.title} placeholder='Add movie title here' />
+        <button style='color:green' style={{backgroundColor:'green'}} onClick={this.add}>Add</button>
         <Search onSearch={this.search.bind(this)} />
         <MovieList movies={this.state.movies} />
       </div>
