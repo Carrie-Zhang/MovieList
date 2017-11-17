@@ -24,7 +24,7 @@ class Search extends React.Component {
   render() {
     return (
       <div>
-        <input type='text' value={this.state.term} onChange={this.onChange}></input>
+        <input type='text' value={this.state.term} onChange={this.onChange}/>
         <button onClick={this.search}>Go!</button>
       </div>
     )

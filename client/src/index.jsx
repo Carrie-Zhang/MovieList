@@ -8,14 +8,11 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      movies : [
-      {title: 'Mean Girls'},
-      {title: 'Hackers'},
-      {title: 'The Grey'},
-      {title: 'Sunshine'},
-      {title: 'Ex Machina'}
-      ]
+      movies : [],
+      title : ''
     };
+    this.update = this.update.bind(this);
+    this.add = this.add.bind(this);
   }
 
   search(term) {
@@ -26,13 +23,14 @@ class App extends React.Component {
       return movie.title.toUpperCase().includes(term.toUpperCase());
     })
 
-    this.setState({
-      movies: temp
-    })
-
-    // if(count === 0) {
-    //   alert('Not Found!');
-    // }
+    if(temp.length !== 0) {
+      this.setState({
+        movies: temp
+      });
+    }
+    if(temp.length === 0) {
+      alert('Not Found!');
+    }
 
     // $.ajax({
     //   url: '/',
@@ -48,10 +46,25 @@ class App extends React.Component {
     // });
   }
 
+  update(e) {
+    this.setState({
+      title : e.target.value
+    });
+  }
+
+  add() {
+    this.state.movies.push({title: this.state.title});
+    this.setState({
+      movies: this.state.movies
+    });
+  }
+
   render() {
     return (
       <div>
         <h1>MovieList</h1>
+        <input type='text' onChange={this.update}/>
+        <button onClick={this.add}>Add</button>
         <Search onSearch={this.search.bind(this)} />
         <MovieList movies={this.state.movies} />
       </div>
@@ -60,3 +73,15 @@ class App extends React.Component {
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
+/*
+user enter a new movie title
+get the val of title
+user clicks
+get the val, use the val to add to the movie list
+*/
+
+      // {title: 'Mean Girls'},
+      // {title: 'Hackers'},
+      // {title: 'The Grey'},
+      // {title: 'Sunshine'},
+      // {title: 'Ex Machina'}
